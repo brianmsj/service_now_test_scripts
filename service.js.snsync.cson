@@ -1,0 +1,11 @@
+instance: "dev23597"
+table: "sys_script_client"
+sysId: "0014099c3711200024d1973ebebe5dbe"
+field: "script"
+name: null
+description: null
+creds:
+  username: "admin"
+  password: "TGFuc2ZvcmQ1JQ=="
+checksum: "34b8ed2bc6ee772b7cfb4a44a02bb22dfe8df51ff55aae316bc978887ecb7081"
+syncEnabled: true
