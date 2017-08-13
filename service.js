@@ -30,3 +30,8 @@ record.setValue('u_date',date);
 record.insert();
 
 }
+
+function getUser() {
+   var user = g_user.getFullName()
+   return user
+}
