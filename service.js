@@ -35,3 +35,7 @@ function getUser() {
    var user = g_user.getFullName()
    return user
 }
+
+function skillsAssess() {
+   g_user.getSkills('skillsassment','addtoField')
+}
