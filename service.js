@@ -39,3 +39,23 @@ function getUser() {
 function skillsAssess() {
    g_user.getSkills('skillsassment','addtoField')
 }
+
+(function executeUIAction(current, previous) {
+var cost = 0;
+var budget = parseFloat(current.budget.getCurrencyValue());
+var mrkevent = current.sys_id;
+var evtname = current.name;
+//Get the total cost of all equipment for this event
+var equipment = new GlideRecord('x_snc_marketing_ev_equipment_request');
+equipment.addQuery('marketing_event', mrkevent);
+equipment.query();
+while(equipment.next()){
+cost = cost + parseFloat(equipment.cost.getCurrencyValue());
+}
+//Display cost and budget error
+gs.addInfoMessage('The total cost of ' + evtname + ' is ' + cost + '.');
+if(cost > budget){
+gs.addErrorMessage('Equipment costs for ' + evtname + ' exceed the event budget.');
+}
+action.setRedirectURL(current);
+}(current, typeof previous != 'undefined' ? previous : null));
