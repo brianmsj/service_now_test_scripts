@@ -75,3 +75,22 @@ function onSubmit() {
 	}
    
 }
+//Business rule script to evalute the budgetcost vs the equipment cost
+(function executeRule(current, previous /*null when async*/) {
+ var cost = 0;
+ var budget = current.budget;
+ var mrkevent = current.sys_id;
+ var evtname = current.name;
+ // Get the total cost of all equipment for this event
+ var equipment =  new GlideRecord('x_145748_marketing_equipment_request');
+ equipment.addQuery('marketing_event', mrkevent);
+ equipment.query();
+ while(equipment.next()) {
+	 cost = cost + parseFloat(equipment.cost.getCurrencyValue());
+ }
+ gs.addInfoMessage('The total cost of ' + evtname + ' is ' + cost + '.');
+	if(cost > budget) {
+		gs.addErrorMessage('Equipment costs for ' + evtname + ' exceed the event budget.');
+	}
+
+})(current, previous);
