@@ -59,3 +59,19 @@ gs.addErrorMessage('Equipment costs for ' + evtname + ' exceed the event budget.
 }
 action.setRedirectURL(current);
 }(current, typeof previous != 'undefined' ? previous : null));
+
+
+//this is the script to change the error message on the marketing event forms
+function onSubmit() {
+   if(g_form.getValue('end_date') == '')
+	   return;
+   if(g_form.getValue('end_date') < g_form.getValue('start_date')) {
+	    g_form.clearMessages();
+	
+	g_form.addErrorMessage(g_form.getLabelOf('end_date') + ' ' + 
+		 getMessage('must be after') + ' ' + g_form.getLabelOf('start_date'));
+		 return false;
+	
+	}
+   
+}
