@@ -94,3 +94,26 @@ function onSubmit() {
 	}
 
 })(current, previous);
+
+//event business rule script
+
+(function executeRule(current, previous /*null when async*/) {
+ //This function will be automatically called when this rule is processed.
+      //Add event when attendee inserted
+      if(current.operation() == 'insert' && current.marketing_event.changes()) {
+              gs.eventQueue('x_snc_marketing_ev.attendee.added', current,
+current.marketing_event, current.email);
+      }
+      //Add event when marketing event changes
+      if(current.operation() == 'update' && current.marketing_event.changes()) {
+              gs.eventQueue('x_snc_marketing_ev.attendee.deleted', previous,
+previous.marketing_event, previous.email);
+              gs.eventQueue('x_snc_marketing_ev.attendee.added', current,
+current.marketing_event, current.email);
+      }
+      //Add event when attendee deleted
+      if(current.operation() == 'delete') {
+              gs.eventQueue('x_snc_marketing_ev.attendee.deleted', current,
+            current.marketing_event, current.email);
+}
+})(current, previous);
