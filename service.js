@@ -117,3 +117,31 @@ current.marketing_event, current.email);
             current.marketing_event, current.email);
 }
 })(current, previous);
+
+// Client side onclick function
+function reopenIncident(){
+   if (g_form.getValue('comments') == '') {
+      // Remove any existing field message, set comments mandatory, and show a new field message
+      try {
+         g_form.hideFieldMsg('comments');
+      } catch(e) {}
+      g_form.setMandatory('comments', true);
+      g_form.showFieldMsg('comments', getMessage('Please enter a comment when reopening an Incident'), 'error');
+      return false;  // Abort submission
+   }
+   // Call the UI Action and skip the 'onclick' function
+   gsftSubmit(null, g_form.getFormElement(), 'reopen_incident'); // MUST call the 'Action name' set in this UI Action
+}
+
+// Code that runs without 'onclick'
+// Ensure call to server side function with no browser errors
+if (typeof window == 'undefined')
+   serverReopen();
+
+function serverReopen() {
+   // Set Incident state to active, update and reload the record
+   current.incident_state = 2;
+   current.update();
+   gs.addInfoMessage(gs.getMessage("Incident reopened"));
+   action.setRedirectURL(current);
+}
