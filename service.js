@@ -145,3 +145,19 @@ function serverReopen() {
    gs.addInfoMessage(gs.getMessage("Incident reopened"));
    action.setRedirectURL(current);
 }
+cascadeComment();
+
+function cascadeComment(){
+
+ var cmt = current.comments;
+ var inc = new GlideRecord("incident");
+ inc.addQuery("parent", "=", current.sys_id);
+ inc.query();
+   while (inc.next()) {
+    inc.comments = cmt;
+    inc.incident_state.setValue( 7);
+    inc.active.setValue(false);
+    inc.update();
+    gs.print("Incident " + inc.number + " closed based on closure of incident " + current.number);
+   }
+}
