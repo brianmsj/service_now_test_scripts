@@ -161,3 +161,15 @@ function cascadeComment(){
     gs.print("Incident " + inc.number + " closed based on closure of incident " + current.number);
    }
 }
+
+//Create multiple new records with Glide Record
+var newIncidents = []
+var counter = 1
+var incidentGR = new GlideRecord('incident')
+while(counter <= 5) {
+  incidentGR.newRecord();
+  incidentGR.short_description = "Incident #" + counter;
+  counter++
+  newIncidents.push(incidentGR.insert())
+}
+gs.print(newIncidents)
