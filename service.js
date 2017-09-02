@@ -177,4 +177,6 @@ gs.print(newIncidents)
 var hive = new GlideRecord('u_highmetric_hive')
 addQuery('priority')
 query();
-while(hive.next())
+while(hive.next()) {
+	gs.print(hive)
+}
