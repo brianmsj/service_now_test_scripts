@@ -179,4 +179,5 @@ addQuery('priority')
 query();
 while(hive.next()) {
 	gs.print(hive)
+	hive.priority = '1'
 }
