@@ -146,6 +146,7 @@ function serverReopen() {
    action.setRedirectURL(current);
 }
 cascadeComment();
+serverReopen()
 
 function cascadeComment(){
 
