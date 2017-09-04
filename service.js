@@ -181,4 +181,6 @@ while(hive.next()) {
 	gs.print(hive)
 	hive.priority = '1'
 	hive.number = '001'
+	hive.task = 'task'
+	
 }
