@@ -187,3 +187,10 @@ while(hive.next()) {
 	hive.task = 'task'
 	
 }
+
+var app = angular.module('myApp', []);
+
+app.controller('myController',function($scope){
+   $scope.handle = '';
+   $scope.characters = 5;
+})
